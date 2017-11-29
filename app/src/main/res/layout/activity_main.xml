@@ -62,4 +62,12 @@
         app:layout_constraintHorizontal_bias="0.49"
         android:layout_marginStart="8dp" />
 
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="测试解密"
+        tools:layout_editor_absoluteX="128dp"
+        tools:layout_editor_absoluteY="219dp"/>
+
 </android.support.constraint.ConstraintLayout>

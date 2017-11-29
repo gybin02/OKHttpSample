@@ -1,7 +1,8 @@
 package com.android.okhttpsample;
 
 import android.util.Log;
-import android.widget.Toast;
+
+import com.android.okhttpsample.http.AesRequestInterceptor;
 
 import java.io.IOException;
 
@@ -24,9 +25,13 @@ public class PostRequest {
         final MediaType JSON
                 = MediaType.parse("application/json; charset=utf-8");
 
-        OkHttpClient client = new OkHttpClient();
+//        OkHttpClient client = new OkHttpClient();
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(new AesRequestInterceptor())
+                .build();
+//        client.interceptors().add(new AesRequestInterceptor());
 
-        String url = "http://www.ssaurel.com/tmp/jsonService";
+        String url = "http://test-diaries.seeyouyima.com/v2/test";
         String json = "{'mode' : 'test'}"; // Json Content ...
 
         RequestBody body = RequestBody.create(JSON, json);
