@@ -37,7 +37,7 @@ public class AesRequestInterceptor implements Interceptor {
         } else {
             encoding = encoding + ",elder";
         }
-
+//        encoding= "gzip,elder";
         Headers headers = request.headers()
                                  .newBuilder()
                                  .set(headKey, encoding)
