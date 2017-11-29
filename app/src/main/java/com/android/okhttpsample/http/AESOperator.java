@@ -46,7 +46,8 @@ public class AESOperator {
         IvParameterSpec iv = new IvParameterSpec(vector.getBytes());// 使用CBC模式，需要一个向量iv，可增加加密算法的强度
         cipher.init(Cipher.ENCRYPT_MODE, skeySpec, iv);
         byte[] encrypted = cipher.doFinal(encData.getBytes("utf-8"));
-        return Base64.encodeToString(encrypted, Base64.DEFAULT);// 此处使用BASE64做转码。
+        return  new String(encrypted);
+//        return Base64.encodeToString(encrypted, Base64.DEFAULT);// 此处使用BASE64做转码。
     }
 
 
@@ -58,8 +59,9 @@ public class AESOperator {
         IvParameterSpec iv = new IvParameterSpec(ivParameter.getBytes());// 使用CBC模式，需要一个向量iv，可增加加密算法的强度
         cipher.init(Cipher.ENCRYPT_MODE, skeySpec, iv);
         byte[] encrypted = cipher.doFinal(sSrc.getBytes("utf-8"));
+        return  new String(encrypted);
         // 此处使用BASE64做转码
-        return Base64.encodeToString(encrypted, Base64.DEFAULT);
+//        return Base64.encodeToString(encrypted, Base64.DEFAULT);
     }
 
     // 解密
