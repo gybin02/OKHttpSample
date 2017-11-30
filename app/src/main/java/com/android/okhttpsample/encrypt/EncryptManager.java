@@ -21,7 +21,7 @@ public class EncryptManager {
 //    public static EncryptManager getInstance() {
 //        return Holder.instance;
 //    }
-//
+
 //    private static class Holder {
 //        static EncryptManager instance = new EncryptManager();
 //    }
@@ -60,15 +60,15 @@ public class EncryptManager {
 //     * @return
 //     */
 //    public boolean useEncrypt(String msg) {
-//
-////        String result = FileStoreProxy.getValue(msg, SP_NAME);
-////        if (StringUtils.equals(uniqueKey, result)) {
-////            return true;
-////        }
-////        String currentKey = FileStoreProxy.getValue(uniqueKey, SP_NAME);
-////        boolean hasKey = StringUtils.isNotEmpty(currentKey);
-////        String encryptVersion = FileStoreProxy.getValue(encryptKey(msg, false), SP_NAME);
-////        return hasKey && StringUtils.equals(encryptVersion, uniqueKey);
+
+//        String result = FileStoreProxy.getValue(msg, SP_NAME);
+//        if (StringUtils.equals(uniqueKey, result)) {
+//            return true;
+//        }
+//        String currentKey = FileStoreProxy.getValue(uniqueKey, SP_NAME);
+//        boolean hasKey = StringUtils.isNotEmpty(currentKey);
+//        String encryptVersion = FileStoreProxy.getValue(encryptKey(msg, false), SP_NAME);
+//        return hasKey && StringUtils.equals(encryptVersion, uniqueKey);
 //    }
 //
 //    private String generateMyKey() {

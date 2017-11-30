@@ -34,7 +34,7 @@ public class PostRequest {
 
         String url = "https://test-diaries.seeyouyima.com/v2/test";
 //         "?myuid=167266757&utdid=Whzd1yQcpzgDAMoGyEWh189W";
-        String json = "{'mode' : 'test'}"; // Json Content ...
+        String json = "{\"mode\" : \"test\"}"; // Json Content ...
 
         RequestBody body = RequestBody.create(JSON, json);
         Request request = new Request.Builder()

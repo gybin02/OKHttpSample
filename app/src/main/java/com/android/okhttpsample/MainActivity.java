@@ -60,17 +60,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String content = "啊啊坎大哈的卡扩大2342jndsfsx";
 
         try {
-            AESOperator aes = new AESOperator();
-            String temp="7prXtbnTSDKCMUEXJCVXjpvx/5crbsLTV6TCHkSuYEg=";
-            Log.e(TAG, aes.decrypt(temp));
-//            System.exit(0);
-//            //加密
-//            Log.e(TAG, "加密前：" + content);
-//            String encrypt = aes.encrypt(content);
-//            Log.e(TAG, "加密后：" + encrypt);
-//            //解密
-//            String decrypt = aes.decrypt(encrypt);
-//            Log.e(TAG, "解密后：" + decrypt);
+            AESOperator aes =  AESOperator.getInstance();
+        
+//            String temp="7prXtbnTSDKCMUEXJCVXjpvx/5crbsLTV6TCHkSuYEg=";
+//            Log.e(TAG, aes.decrypt(temp));
+            
+
+            //加密
+            Log.e(TAG, "加密前：" + content);
+            byte[] encrypt = aes.encryptByte(content);
+            Log.e(TAG, "加密后：" + new String(encrypt));
+            //解密
+            String decrypt = aes.decrypt(encrypt);
+            Log.e(TAG, "解密后：" + decrypt);
         } catch (Exception e) {
             e.printStackTrace();
         }

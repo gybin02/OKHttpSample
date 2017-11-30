@@ -13,10 +13,9 @@ import javax.crypto.spec.SecretKeySpec;
  */
 
 public class AESOperator {
-
-
     /*
      * 加密用的Key 可以用26个字母和数字组成 此处使用AES-128-CBC加密模式，key需要为16位。
+     * 已服务端定义好的值
      */
     private String sKey = "a2e502fa9f48b5cf";//key，可自行修改
     private String ivParameter = "a2e502fa9f48b5cf";//偏移量,可自行修改
@@ -32,8 +31,28 @@ public class AESOperator {
         return instance;
     }
 
-    public static String Encrypt(String encData, String secretKey, String vector) throws Exception {
+    /**
+     * 加密
+     *
+     * @param sSrc
+     * @return
+     * @throws Exception
+     */
+    public String encrypt(String sSrc) throws Exception {
+        return encrypt2String(sSrc, sKey, ivParameter);
+    }
 
+    public byte[] encryptByte(String sSrc) throws Exception {
+        return encrypt2Byte(sSrc, sKey, ivParameter);
+    }
+
+
+    private String encrypt2String(String encData, String secretKey, String vector) throws Exception {
+        byte[] data = encrypt2Byte(encData, secretKey, vector);
+        return Base64.encodeToString(data, Base64.DEFAULT);
+    }
+
+    private byte[] encrypt2Byte(String encData, String secretKey, String vector) throws Exception {
         if (secretKey == null) {
             return null;
         }
@@ -43,52 +62,119 @@ public class AESOperator {
         Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
         byte[] raw = secretKey.getBytes();
         SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
-        IvParameterSpec iv = new IvParameterSpec(vector.getBytes());// 使用CBC模式，需要一个向量iv，可增加加密算法的强度
+        IvParameterSpec iv = new IvParameterSpec(vector.getBytes());
+        // 使用CBC模式，需要一个向量iv，可增加加密算法的强度
         cipher.init(Cipher.ENCRYPT_MODE, skeySpec, iv);
         byte[] encrypted = cipher.doFinal(encData.getBytes("utf-8"));
-        return  new String(encrypted);
-//        return Base64.encodeToString(encrypted, Base64.DEFAULT);// 此处使用BASE64做转码。
+        return encrypted;
+//        if (isBase64) {
+//            return Base64.encodeToString(encrypted, Base64.DEFAULT);// 此处使用BASE64做转码。 
+//        } else {
+//           return parseByte2HexStr(encrypted);
+//            StringBuilder builder = new StringBuilder();
+//            for (byte b : encrypted)
+//                builder.append(String.format("%02x", b));
+//            return builder.toString();
+//           return Base64.encodeToString(encrypted,Base64.NO_WRAP);
+//            return new String(encrypted,"utf-8");
+//        }
     }
 
+//    private static String encodeHex(byte[] data) {
+//        if (data == null) {
+//            return null;
+//        }
+//
+//        StringBuilder sbuilder = new StringBuilder(data.length * 2);
+//
+//        for (int i=0;i<data.length;i++) {
+//            if (((int) data[i] & 0xff) < 0x10) {
+//                sbuilder.append("0");
+//            }
+//
+//            sbuilder.append(Long.toString((int)data[i] & 0xff, 16));
+//        }
+//
+//        return sbuilder.toString().toUpperCase();
+//    }
 
-    // 加密
-    public String encrypt(String sSrc) throws Exception {
-        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-        byte[] raw = sKey.getBytes();
-        SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
-        IvParameterSpec iv = new IvParameterSpec(ivParameter.getBytes());// 使用CBC模式，需要一个向量iv，可增加加密算法的强度
-        cipher.init(Cipher.ENCRYPT_MODE, skeySpec, iv);
-        byte[] encrypted = cipher.doFinal(sSrc.getBytes("utf-8"));
-        return  new String(encrypted);
-        // 此处使用BASE64做转码
-//        return Base64.encodeToString(encrypted, Base64.DEFAULT);
-    }
 
-    // 解密
+//    /**
+//
+//     * 将byte数组转换成16进制String
+//
+//     * @param buf
+//
+//     * @return
+//
+//     */
+
+//    public static String parseByte2HexStr(byte buf[]) {
+//
+//        StringBuffer sb = new StringBuffer();
+//
+//        for (int i = 0; i < buf.length; i++) {
+//
+//            String hex = Integer.toHexString(buf[i] & 0xFF);
+//
+//            if (hex.length() == 1) {
+//
+//                hex = '0' + hex;
+//
+//            }
+//
+//            sb.append(hex.toUpperCase());
+//
+//        }
+//
+//        return sb.toString();
+//
+//    }
+
+
+    /**
+     * 解密
+     *
+     * @param sSrc
+     * @return
+     * @throws Exception
+     */
+
     public String decrypt(String sSrc) throws Exception {
-        try {
-            byte[] raw = sKey.getBytes("ASCII");
-            SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
-            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-            IvParameterSpec iv = new IvParameterSpec(ivParameter.getBytes());
-            cipher.init(Cipher.DECRYPT_MODE, skeySpec, iv);
-            byte[] encrypted1 = Base64.decode(sSrc, Base64.DEFAULT);// 先用base64解密
-            byte[] original = cipher.doFinal(encrypted1);
-            String originalString = new String(original, "utf-8");
-            return originalString;
-        } catch (Exception ex) {
-            return null;
-        }
+        byte[] encrypted1 = Base64.decode(sSrc, Base64.DEFAULT);// 先用base64解密 
+        return decryptBase(encrypted1, sKey, ivParameter);
     }
 
-    public String decrypt(String sSrc, String key, String ivs) throws Exception {
+    public String decrypt(byte[] sSrc) throws Exception {
+        return decryptBase(sSrc, sKey, ivParameter);
+    }
+
+//    public String decrypt(String sSrc, String key, String ivs) throws Exception {
+//        return decryptBase(sSrc, key, ivs, true);
+//    }
+
+    /**
+     * 解密过程
+     *
+     * @param sSrc
+     * @param key
+     * @param ivs
+     * @return
+     * @throws Exception
+     */
+    private String decryptBase(byte[] sSrc, String key, String ivs) throws Exception {
         try {
             byte[] raw = key.getBytes("ASCII");
             SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
             IvParameterSpec iv = new IvParameterSpec(ivs.getBytes());
             cipher.init(Cipher.DECRYPT_MODE, skeySpec, iv);
-            byte[] encrypted1 = Base64.decode(sSrc, Base64.DEFAULT);// 先用base64解密
+            byte[] encrypted1 = sSrc;
+//            if (isBase64) {
+//                encrypted1 = Base64.decode(sSrc, Base64.DEFAULT);// 先用base64解密 
+//            } else {
+//                encrypted1 = Base64.decode(sSrc, Base64.NO_WRAP);
+//            }
             byte[] original = cipher.doFinal(encrypted1);
             String originalString = new String(original, "utf-8");
             return originalString;
@@ -97,16 +183,16 @@ public class AESOperator {
         }
     }
 
-    public static String encodeBytes(byte[] bytes) {
-        StringBuffer strBuf = new StringBuffer();
-
-        for (int i = 0; i < bytes.length; i++) {
-            strBuf.append((char) (((bytes[i] >> 4) & 0xF) + ((int) 'a')));
-            strBuf.append((char) (((bytes[i]) & 0xF) + ((int) 'a')));
-        }
-
-        return strBuf.toString();
-    }
+//    public static String encodeBytes(byte[] bytes) {
+//        StringBuffer strBuf = new StringBuffer();
+//
+//        for (int i = 0; i < bytes.length; i++) {
+//            strBuf.append((char) (((bytes[i] >> 4) & 0xF) + ((int) 'a')));
+//            strBuf.append((char) (((bytes[i]) & 0xF) + ((int) 'a')));
+//        }
+//
+//        return strBuf.toString();
+//    }
 
 
     public static void main(String aregs[]) {
