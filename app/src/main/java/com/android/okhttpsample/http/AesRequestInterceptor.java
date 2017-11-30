@@ -102,7 +102,7 @@ public class AesRequestInterceptor implements Interceptor {
         
 //        String content = sink.buffer().readUtf8();
         AESOperator aes = new AESOperator();
-        byte[] encrypt = aes.encryptByte(bytes);
+        byte[] encrypt = aes.encrypt(bytes);
         RequestBody requestBody = RequestBody.create(body.contentType(), encrypt);
         return requestBody;
     }
