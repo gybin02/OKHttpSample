@@ -39,20 +39,21 @@ public class AESOperator {
      * @throws Exception
      */
     public String encrypt(String sSrc) throws Exception {
-        return encrypt2String(sSrc, sKey, ivParameter);
+        return encryptString(sSrc, sKey, ivParameter);
     }
 
-    public byte[] encryptByte(String sSrc) throws Exception {
-        return encrypt2Byte(sSrc, sKey, ivParameter);
+    public byte[] encrypt(byte[] source) throws Exception {
+        return encryptByte(source, sKey, ivParameter);
     }
 
 
-    private String encrypt2String(String encData, String secretKey, String vector) throws Exception {
-        byte[] data = encrypt2Byte(encData, secretKey, vector);
+    private String encryptString(String encData, String secretKey, String vector) throws Exception {
+        byte[] bytes = encData.getBytes("UTF-8");
+        byte[] data = encryptByte(bytes, secretKey, vector);
         return Base64.encodeToString(data, Base64.DEFAULT);
     }
 
-    private byte[] encrypt2Byte(String encData, String secretKey, String vector) throws Exception {
+    private byte[] encryptByte(byte[] source, String secretKey, String vector) throws Exception {
         if (secretKey == null) {
             return null;
         }
@@ -65,7 +66,7 @@ public class AESOperator {
         IvParameterSpec iv = new IvParameterSpec(vector.getBytes());
         // 使用CBC模式，需要一个向量iv，可增加加密算法的强度
         cipher.init(Cipher.ENCRYPT_MODE, skeySpec, iv);
-        byte[] encrypted = cipher.doFinal(encData.getBytes("utf-8"));
+        byte[] encrypted = cipher.doFinal(source);
         return encrypted;
     }
 
