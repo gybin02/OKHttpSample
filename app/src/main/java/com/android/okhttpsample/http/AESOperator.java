@@ -67,69 +67,7 @@ public class AESOperator {
         cipher.init(Cipher.ENCRYPT_MODE, skeySpec, iv);
         byte[] encrypted = cipher.doFinal(encData.getBytes("utf-8"));
         return encrypted;
-//        if (isBase64) {
-//            return Base64.encodeToString(encrypted, Base64.DEFAULT);// 此处使用BASE64做转码。 
-//        } else {
-//           return parseByte2HexStr(encrypted);
-//            StringBuilder builder = new StringBuilder();
-//            for (byte b : encrypted)
-//                builder.append(String.format("%02x", b));
-//            return builder.toString();
-//           return Base64.encodeToString(encrypted,Base64.NO_WRAP);
-//            return new String(encrypted,"utf-8");
-//        }
     }
-
-//    private static String encodeHex(byte[] data) {
-//        if (data == null) {
-//            return null;
-//        }
-//
-//        StringBuilder sbuilder = new StringBuilder(data.length * 2);
-//
-//        for (int i=0;i<data.length;i++) {
-//            if (((int) data[i] & 0xff) < 0x10) {
-//                sbuilder.append("0");
-//            }
-//
-//            sbuilder.append(Long.toString((int)data[i] & 0xff, 16));
-//        }
-//
-//        return sbuilder.toString().toUpperCase();
-//    }
-
-
-//    /**
-//
-//     * 将byte数组转换成16进制String
-//
-//     * @param buf
-//
-//     * @return
-//
-//     */
-
-//    public static String parseByte2HexStr(byte buf[]) {
-//
-//        StringBuffer sb = new StringBuffer();
-//
-//        for (int i = 0; i < buf.length; i++) {
-//
-//            String hex = Integer.toHexString(buf[i] & 0xFF);
-//
-//            if (hex.length() == 1) {
-//
-//                hex = '0' + hex;
-//
-//            }
-//
-//            sb.append(hex.toUpperCase());
-//
-//        }
-//
-//        return sb.toString();
-//
-//    }
 
 
     /**
@@ -149,10 +87,6 @@ public class AESOperator {
         return decryptBase(sSrc, sKey, ivParameter);
     }
 
-//    public String decrypt(String sSrc, String key, String ivs) throws Exception {
-//        return decryptBase(sSrc, key, ivs, true);
-//    }
-
     /**
      * 解密过程
      *
@@ -170,11 +104,6 @@ public class AESOperator {
             IvParameterSpec iv = new IvParameterSpec(ivs.getBytes());
             cipher.init(Cipher.DECRYPT_MODE, skeySpec, iv);
             byte[] encrypted1 = sSrc;
-//            if (isBase64) {
-//                encrypted1 = Base64.decode(sSrc, Base64.DEFAULT);// 先用base64解密 
-//            } else {
-//                encrypted1 = Base64.decode(sSrc, Base64.NO_WRAP);
-//            }
             byte[] original = cipher.doFinal(encrypted1);
             String originalString = new String(original, "utf-8");
             return originalString;
@@ -182,17 +111,6 @@ public class AESOperator {
             return null;
         }
     }
-
-//    public static String encodeBytes(byte[] bytes) {
-//        StringBuffer strBuf = new StringBuffer();
-//
-//        for (int i = 0; i < bytes.length; i++) {
-//            strBuf.append((char) (((bytes[i] >> 4) & 0xF) + ((int) 'a')));
-//            strBuf.append((char) (((bytes[i]) & 0xF) + ((int) 'a')));
-//        }
-//
-//        return strBuf.toString();
-//    }
 
 
     public static void main(String aregs[]) {
