@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.android.okhttpsample.gps.GpsPhotoController;
 import com.android.okhttpsample.http.AESOperator;
+import com.android.okhttpsample.permission.PermissionsManager;
+import com.android.okhttpsample.permission.PermissionsResultAction;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     TextView textView;
@@ -28,6 +30,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.button4).setOnClickListener(this);
 
         textView = (TextView) findViewById(R.id.textView);
+
+        PermissionsManager.getInstance()
+                          .requestAllManifestPermissionsIfNecessary(this, new PermissionsResultAction() {
+                              @Override
+                              public void onGranted() {
+                
+                              }
+
+                              @Override
+                              public void onDenied(String permission) {
+
+                
+                              }
+                          });
 
     }
 
