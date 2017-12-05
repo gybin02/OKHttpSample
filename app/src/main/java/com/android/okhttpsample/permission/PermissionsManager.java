@@ -3,6 +3,7 @@ package com.android.okhttpsample.permission;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -239,6 +240,16 @@ public class PermissionsManager {
                 ActivityCompat.requestPermissions(activity, permsToRequest, 1);
             }
         }
+    }
+
+    public void requestPermissionsUseContext(@NonNull Context context,
+                                             @NonNull String[] permissions,
+                                             @Nullable PermissionsResultAction action) {
+        Intent intent = new Intent(context, PermissionActivity.class);
+        intent.putExtra(PermissionActivity.KEY_PERMISSION, permissions);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        PermissionActivity.action = action;
+        context.startActivity(intent);
     }
 
     /**
