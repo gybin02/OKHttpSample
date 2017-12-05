@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             //加密
             Log.e(TAG, "加密前：" + content);
-            byte[] encrypt = aes.encryptByte(content);
+            String encrypt = aes.encrypt(content);
             Log.e(TAG, "加密后：" + new String(encrypt));
             //解密
             String decrypt = aes.decrypt(encrypt);
