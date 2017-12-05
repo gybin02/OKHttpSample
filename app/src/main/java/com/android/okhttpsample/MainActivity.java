@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.okhttpsample.gps.GpsPhotoController;
 import com.android.okhttpsample.http.AESOperator;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -48,7 +49,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 PostRequest.executePostRequest();
                 break;
             case R.id.button4:
-                test();
+//                test();
+                GpsPhotoController.getInstance().getGps();
                 break;
             default:
                 break;
@@ -60,11 +62,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String content = "啊啊坎大哈的卡扩大2342jndsfsx";
 
         try {
-            AESOperator aes =  AESOperator.getInstance();
-        
+            AESOperator aes = AESOperator.getInstance();
+
 //            String temp="7prXtbnTSDKCMUEXJCVXjpvx/5crbsLTV6TCHkSuYEg=";
 //            Log.e(TAG, aes.decrypt(temp));
-            
+
 
             //加密
             Log.e(TAG, "加密前：" + content);
