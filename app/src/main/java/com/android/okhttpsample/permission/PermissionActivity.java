@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentActivity;
 
 import com.android.okhttpsample.R;
 
@@ -13,7 +14,7 @@ import com.android.okhttpsample.R;
  * @author zhengxiaobin@xiaoyouzi.com
  * @since 17/12/5 下午3:22
  */
-public class PermissionActivity extends Activity {
+public class PermissionActivity extends FragmentActivity {
     private static final String TAG = "PermissionActivity";
     public static final String KEY_PERMISSION = "permission";
     public static PermissionsResultAction action;

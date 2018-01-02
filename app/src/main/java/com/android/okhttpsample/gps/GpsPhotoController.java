@@ -64,14 +64,15 @@ public class GpsPhotoController {
         String displayName = MediaStore.Images.Media.DISPLAY_NAME;
 
         //    Media.EXTERNAL_CONTENT_URI和Media.INTERNAL_CONTENT_URI
-        Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-
-        String selection = dateAdded + ">?  limit ?";
-        long earliest = System.currentTimeMillis() - 15 * DAY;
-        String[] selectionArgs = {earliest + "", 20 + ""};
-        String sortOrder = dateAdded + " DESC";
+        Uri uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+        // 通用公试: sql = "select * from table where "+条件+" order by "+排序+" limit "+要显示多少条记录+" offset "+跳过多少条记录
+        String selection = dateAdded + "> ? ";
+        long earliest = (System.currentTimeMillis() - 15 * DAY)/1000;
+        String[] selectionArgs = {earliest + ""};
+        String sortOrder = dateAdded + " DESC limit 3";
         //获取指定列
-        Cursor cursor = contentResolver.query(uri, null, selection, selectionArgs, sortOrder);
+        Cursor cursor = contentResolver.query(uri, null, selection, selectionArgs
+        , sortOrder);
         if (cursor != null) {
             Map<String, String> map = null;
 
@@ -92,10 +93,11 @@ public class GpsPhotoController {
                 String fileName = map.get(displayName);
                 if (!gpsModel.isEmpty() && !pref.isContain(fileName)) {
                     result.add(gpsModel);
-                    pref.putString(fileName);
+//                    pref.putString(fileName);
 
                 }
             }
+            cursor.close();
         }
 
         return result;
