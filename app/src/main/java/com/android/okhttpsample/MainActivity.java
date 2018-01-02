@@ -16,6 +16,7 @@ import com.android.okhttpsample.http.AESOperator;
 import com.android.okhttpsample.permission.PermissionActivity;
 import com.android.okhttpsample.permission.PermissionsManager;
 import com.android.okhttpsample.permission.PermissionsResultAction;
+import com.android.okhttpsample.wifi.WifiStatController;
 
 import java.util.HashMap;
 
@@ -67,10 +68,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button1:
-                System.out.println("Test:  click button1");
+                WifiStatController.getInstance().init();
+//                System.out.println("Test:  click button1");
 //                SynchronousGet.executeSynchronousGet();
 
-                startTestActivity();
+//                startTestActivity();
                 break;
 
             case R.id.button2:
