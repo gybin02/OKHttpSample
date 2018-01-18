@@ -17,6 +17,7 @@ import com.android.okhttpsample.id.UniqueIdUtils;
 import com.android.okhttpsample.permission.PermissionActivity;
 import com.android.okhttpsample.permission.PermissionsManager;
 import com.android.okhttpsample.permission.PermissionsResultAction;
+import com.test.module.AsynchronousGetModule;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //            }
 //        });
 
-    requestAll();
+        requestAll();
 
     }
 
@@ -76,18 +77,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     // Implement the OnClickListener callback
-    
-    public void testImei(){
+
+    public void testImei() {
         Map<String, String> deviceInfo = UniqueIdUtils.getDeviceInfo(context);
         String toString = deviceInfo.toString();
         Log.e(TAG, "onClick: " + toString);
         Toast.makeText(context, "" + toString, Toast.LENGTH_SHORT).show();
 
     }
+
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button1:
-                
+
 //                WifiStatController.getInstance().init();
 //                System.out.println("Test:  click button1");
                 SynchronousGet.executeSynchronousGet();
@@ -98,7 +100,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.button2:
 //                requestAll();
 //                System.out.println("Test:  click button2");
-                AsynchronousGet.executeAsynchronousGet();
+//                AsynchronousGet.executeAsynchronouGet();
+                AsynchronousGetModule.executeAsynchronousGet();
                 break;
 
             case R.id.button3:

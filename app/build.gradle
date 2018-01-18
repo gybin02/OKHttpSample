@@ -38,4 +38,7 @@ dependencies {
     compile project(':xlogging-okhttp')
     compile 'org.aspectj:aspectjrt:1.8.13'
 
+    compile 'com.meiyou.apm:xlog:0.0.1-SNAPSHOT'
+
+
 }
