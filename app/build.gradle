@@ -1,11 +1,20 @@
 apply plugin: 'com.android.application'
+apply plugin: 'android-aspectjx'
+
+
+aspectjx {
+    //织入遍历符合条件的库
+    includeJarFilter 'okhttp'
+//    excludeJarFilter '.jar'
+}
+
 
 android {
     compileSdkVersion 25
     buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.android.okhttpsample"
-        minSdkVersion 21
+        minSdkVersion 14
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -23,5 +32,10 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.squareup.okhttp3:okhttp:3.2.0'
-    implementation 'com.google.code.gson:gson:2.2.4'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    compile 'com.google.code.gson:gson:2.2.4'
+    //    compile project(':xlogging')
+    compile project(':xlogging-okhttp')
+    compile 'org.aspectj:aspectjrt:1.8.13'
+
 }

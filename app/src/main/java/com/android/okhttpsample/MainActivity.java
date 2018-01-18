@@ -13,12 +13,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.okhttpsample.http.AESOperator;
+import com.android.okhttpsample.id.UniqueIdUtils;
 import com.android.okhttpsample.permission.PermissionActivity;
 import com.android.okhttpsample.permission.PermissionsManager;
 import com.android.okhttpsample.permission.PermissionsResultAction;
-import com.android.okhttpsample.wifi.WifiStatController;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     TextView textView;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//        XLogging.install();
         context = this.getApplicationContext();
 
         Button button1 = (Button) findViewById(R.id.button1);
@@ -44,6 +46,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         textView = (TextView) findViewById(R.id.textView);
 
         permissionsManager = PermissionsManager.getInstance();
+
+//        XLogging.install(new XLoggingCallback() {
+//            @Override
+//            public void handle(TransactionData transactionData) {
+//                System.out.println(transactionData.toString());
+//            }
+//        });
+
+    requestAll();
 
     }
 
@@ -65,20 +76,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     // Implement the OnClickListener callback
+    
+    public void testImei(){
+        Map<String, String> deviceInfo = UniqueIdUtils.getDeviceInfo(context);
+        String toString = deviceInfo.toString();
+        Log.e(TAG, "onClick: " + toString);
+        Toast.makeText(context, "" + toString, Toast.LENGTH_SHORT).show();
+
+    }
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button1:
-                WifiStatController.getInstance().init();
+                
+//                WifiStatController.getInstance().init();
 //                System.out.println("Test:  click button1");
-//                SynchronousGet.executeSynchronousGet();
+                SynchronousGet.executeSynchronousGet();
 
 //                startTestActivity();
                 break;
 
             case R.id.button2:
-                requestAll();
+//                requestAll();
 //                System.out.println("Test:  click button2");
-//                AsynchronousGet.executeAsynchronousGet();
+                AsynchronousGet.executeAsynchronousGet();
                 break;
 
             case R.id.button3:
@@ -91,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 requestPermissionsUseContext();
                 break;
             default:
-            
+
                 break;
         }
     }

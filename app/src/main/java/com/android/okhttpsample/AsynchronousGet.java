@@ -1,11 +1,8 @@
 package com.android.okhttpsample;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import java.io.IOException;
-import java.io.StringReader;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -24,12 +21,15 @@ public class AsynchronousGet {
     public static void executeAsynchronousGet() {
 
         OkHttpClient client = new OkHttpClient();
-
+//        OkHttpClient client = new OkHttpClient();
+//        client = XLogging.install(client, XLogging.Level.BODY);
+   
         Request request = new Request.Builder()
-                .url("http://www.vogella.com/index.html")
+                .url("https://www.baidu.com")
                 .build();
 
-        client.newCall(request).enqueue(new Callback() {
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 Log.e(TAG, "onFailure: ");
