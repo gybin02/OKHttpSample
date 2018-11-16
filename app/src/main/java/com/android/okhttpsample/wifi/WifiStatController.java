@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * WIFI 统计
  *
- * @author zhengxiaobin@xiaoyouzi.com
+ * @author zhengxiaobin
  * @since 17/12/29 下午4:08
  */
 public class WifiStatController {

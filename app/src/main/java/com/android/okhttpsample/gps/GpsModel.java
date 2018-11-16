@@ -3,7 +3,7 @@ package com.android.okhttpsample.gps;
 import android.text.TextUtils;
 
 /**
- * @author zhengxiaobin@xiaoyouzi.com
+ * @author zhengxiaobin
  * @since 17/12/5
  */
 

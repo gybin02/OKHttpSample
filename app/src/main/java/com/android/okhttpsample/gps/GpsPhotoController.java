@@ -19,7 +19,7 @@ import java.util.Map;
  * <p>
  * http://qa.meiyou.com/index.php?m=task&f=view&task=615
  *
- * @author zhengxiaobin@xiaoyouzi.com
+ * @author zhengxiaobin
  * @since 17/12/5
  */
 

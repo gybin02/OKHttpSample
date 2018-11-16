@@ -12,7 +12,7 @@ import java.util.Set;
 /**
  * 过滤上传过 图片GPS
  *
- * @author zhengxiaobin@xiaoyouzi.com
+ * @author zhengxiaobin
  * @since 17/12/5
  */
 

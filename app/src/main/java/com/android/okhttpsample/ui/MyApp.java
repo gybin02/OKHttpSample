@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 /**
- * @author zhengxiaobin@xiaoyouzi.com
+ * @author zhengxiaobin
  * @since 17/11/29
  */
 
