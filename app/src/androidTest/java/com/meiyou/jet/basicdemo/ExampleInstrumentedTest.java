@@ -1,4 +1,4 @@
-//package com.meiyou.jet.basicdemo;
+//package com.jet.jet.basicdemo;
 //
 //import android.content.Context;
 //import android.content.SharedPreferences;
@@ -62,7 +62,7 @@
 //        Log.d(TAG, "useAppContext: assetManager:  " + s);
 //
 //
-//        assertEquals("com.meiyou.jet.basicdemo", packageName);
+//        assertEquals("com.jet.jet.basicdemo", packageName);
 //    }
 //
 //

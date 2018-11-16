@@ -2,11 +2,11 @@ package com.android.okhttpsample.encrypt;
 
 import javax.crypto.Cipher;
 
-//import com.meiyou.framework.io.FileStoreProxy;
-//import com.meiyou.framework.util.DesUtils;
-//import com.meiyou.framework.util.PackageUtil;
-//import com.meiyou.sdk.core.LogUtils;
-//import com.meiyou.sdk.core.StringUtils;
+//import com.jet.framework.io.FileStoreProxy;
+//import com.jet.framework.util.DesUtils;
+//import com.jet.framework.util.PackageUtil;
+//import com.jet.sdk.core.LogUtils;
+//import com.jet.sdk.core.StringUtils;
 
 /**
  * 加解密manager

@@ -1,4 +1,4 @@
-package com.meiyou.jet.basicdemo;
+package com.jet.jet.basicdemo;
 
 /**
  * @author zhengxiaobin
